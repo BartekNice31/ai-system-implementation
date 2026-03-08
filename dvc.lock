@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  download_data:
+    cmd: python src/download_data.py
+    deps:
+    - path: src/download_data.py
+      hash: md5
+      md5: 7f262ab498f1d30525ebbf349e8598a6
+      size: 991
+    params:
+      params.yaml:
+        data.dataset_id: 40945
+    outs:
+    - path: data/titanic.csv
+      hash: md5
+      md5: 7fd686fc41fc1f3b60e2c59f15438bbc
+      size: 108332
+  prepare_data:
+    cmd: python src/prepare_data.py
+    deps:
+    - path: data/titanic.csv
+      hash: md5
+      md5: 7fd686fc41fc1f3b60e2c59f15438bbc
+      size: 108332
+    - path: src/prepare_data.py
+      hash: md5
+      md5: 4283f31d32862b1ddaaf41d56160867a
+      size: 2289
+    params:
+      params.yaml:
+        prepare.random_state: 42
+        prepare.test_size: 0.2
+    outs:
+    - path: data/test.csv
+      hash: md5
+      md5: 827cca270d350d3b1d1e6dcf3b3217f7
+      size: 8777
+    - path: data/train.csv
+      hash: md5
+      md5: ddd525c10743650cd67168ab2f686599
+      size: 34949
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/test.csv
+      hash: md5
+      md5: 827cca270d350d3b1d1e6dcf3b3217f7
+      size: 8777
+    - path: data/train.csv
+      hash: md5
+      md5: ddd525c10743650cd67168ab2f686599
+      size: 34949
+    - path: src/train_model.py
+      hash: md5
+      md5: 782be67baac7e02669246a352442e7d9
+      size: 2532
+    params:
+      params.yaml:
+        model.max_depth: 5
+        model.n_estimators: 100
+        model.random_state: 42
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 63e372d6ffcb32249a5a8120718c487a
+      size: 49
+    - path: models/model.pkl
+      hash: md5
+      md5: 9f37f50a81115ad67665d148779d4f31
+      size: 430102
