@@ -23,7 +23,7 @@ def main():
     print("Procedura wczytywania plików")
     df = pd.read_csv("data/titanic.csv")
     print(f"Wczytano {len(df)} rekordow.")
-
+    print(f"Rozmiar pliku: {df.shape}")
     # Usuniecie kolumn, ktore nie sa przydatne do modelowania
     kolumny_do_usuniecia = ["name", "ticket", "cabin", "body", "boat", "home.dest"]
     df = df.drop(columns=kolumny_do_usuniecia)

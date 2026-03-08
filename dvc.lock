@@ -24,8 +24,8 @@ stages:
       size: 108332
     - path: src/prepare_data.py
       hash: md5
-      md5: 4283f31d32862b1ddaaf41d56160867a
-      size: 2289
+      md5: 9aa32a88686e5aefcba943288915c312
+      size: 2328
     params:
       params.yaml:
         prepare.random_state: 42
